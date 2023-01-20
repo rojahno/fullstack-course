@@ -116,7 +116,6 @@ button {
 </style>
 
 <script lang="ts">
-import { assertExpressionStatement } from "@babel/types";
 import { defineComponent } from "vue";
 import { useFormStore } from "../stores/form";
 
@@ -138,10 +137,6 @@ export default defineComponent({
       form.update_message_text(messageString);
     }
 
-    function submitForm(event: Event) {
-      event.preventDefault();
-      alert("Success");
-    }
     // @ts-ignore
     window.stores = { form };
 
@@ -150,13 +145,12 @@ export default defineComponent({
       updateName,
       updateEmail,
       updateMessage,
-      submitForm,
     };
   },
   methods: {
     submitForm(event: Event) {
       event.preventDefault();
-      fetch("http://localhost:3000/posts/1", {
+      fetch("http://localhost:3000/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -169,7 +163,18 @@ export default defineComponent({
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Success:", data.body);
+          alert(
+            "Success!" +
+              "\n Name: " +
+              data.name +
+              " " +
+              "\n Email: " +
+              data.email +
+              " " +
+              "\n Message: " +
+              data.message +
+              "\n was sent to the server"
+          );
         })
         .catch((error) => {
           console.error("Error:", error);

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import FormView from "../views/FormView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +18,7 @@ const router = createRouter({
     {
       path: "/form",
       name: "Form",
-      component: () => import("../views/Form.vue"),
+      component: () => import("../views/FormView.vue"),
     },
   ],
 });
